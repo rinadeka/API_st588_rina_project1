@@ -1,5 +1,5 @@
 ---
-title: "Interacting with APIs: Example with Spoontacular Food and Recipe API"
+title: "Interacting with APIs: Example with Spoonacular Food and Recipe API"
 author: "Rina Deka"
 date: "06/25/2023"
 output: 
@@ -13,12 +13,105 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-This document is a vignette to demonstrate how one may retrieve data from an [API](https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces). In this tutorial, I will be interacting with Spoontacular's [food API](https://spoonacular.com/food-api/docs). I have created a few functions to interact with a few endpoints for user ease, and I'll use these to explore some of the data that was retrieved. 
+This document is a vignette to demonstrate how one may retrieve data from an [API](https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces). In this tutorial, I will be interacting with Spoonacular's [food API](https://spoonacular.com/food-api/docs). I have created a few functions to interact with a few endpoints for user ease, and I'll use these to explore some of the data that was retrieved. 
 
 
-```{r,echo=FALSE,eval=FALSE}
+# Requirements 
+
+To use the functions for interacting with the food API, I used the following packages:
+
+- [`httr`](https://cran.r-project.org/web/packages/httr/index.html) : 
+- [`jsonlite`](https://cran.r-project.org/web/packages/jsonlite/): API interaction
+- [`tidyverse`](https://www.tidyverse.org/): tons of useful features for data manipulation and visualization
+
+Please note that the API key I used was "d3ac9a84da954e469bb394dc8b157681", but yours will be different.
+
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 library(httr)
 library(jsonlite)
 library(tidyverse)
 ```
+
+
+# API Interaction Functions
+
+Suppose that I would like to create a function that will return well-parsed data so that one can look at ingredient and nutrition information for a reciple given some sort of dietary restriction. 
+
+```{r}
+getRecipesByDiet <- function(diet,number=10) {
+  apiKey <- "d3ac9a84da954e469bb394dc8b157681"  # Replace with your actual API key
+  
+  endpoint <- "/recipes/complexSearch"
+  
+  # Set the parameters for the API request
+  parameters <- list(
+    apiKey = apiKey,
+    number = number,  # Number of recipes to retrieve (default: 10)
+    diet = diet,  # Dietary restriction (e.g., "vegan", "gluten-free", "keto")
+    addRecipeNutrition = TRUE  # Include additional recipe information
+    # You can add more parameters as required by the endpoint
+  )
+  
+  # Build the URL
+  base_url <- "https://api.spoonacular.com"
+  url <- paste0(base_url, endpoint)
+  
+  # Send the API request
+  response <- GET(url, query = parameters)
+  
+  # Check for successful response
+  if (http_type(response) == "application/json") {
+    content <- fromJSON(rawToChar(response$content), flatten = TRUE)
+    
+    # Extract relevant information from the response
+    recipes <- content$results
+    recipes <- recipes %>% select(-c("gaps","sourceUrl","imageType","image","analyzedInstructions","license","spoonacularSourceUrl","creditsText","author"))
+   # recipes <- unnest(recipes,cols=c("nutrition.ingredients"),names_repair = "unique")
+    #recipes <- unnest(recipes,cols=c("nutrition.nutrients"),names_repair = "unique")
+    #reciples<- recipes %>% unnest(cols=c("nutrition.nutrients","nutrition.properties","nutrition.flavonoids","nutrition.ingredients"),names_repair="unique")
+    #Unnest the data-frame and create new columns for each nutrient
+    recipes <- unnest_wider(recipes,)
+
+    return(recipes)
+  } else {
+    stop("API request failed. Status code: ", status_code(response))
+  }
+}
+```
+
+
+
+# Exploratory Data Analysis 
+
+
+```{r}
+diet <- "vegan"  # Replace with the desired dietary restriction
+
+recipes <- getRecipesByDiet(diet,number=100)
+
+recipes
+```
+
+
+```{r}
+colnames(recipes)
+```
+
+```{r}
+recipes$nutrition.nutrients
+```
+
+
+```{r}
+recipes$nutrition.ingredients
+```
+
+
+
+# Conclusion 
+
+
+
+
 
