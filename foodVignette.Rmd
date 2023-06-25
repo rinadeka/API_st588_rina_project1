@@ -73,7 +73,6 @@ getRecipesByDiet <- function(diet,number=10) {
     #recipes <- unnest(recipes,cols=c("nutrition.nutrients"),names_repair = "unique")
     #reciples<- recipes %>% unnest(cols=c("nutrition.nutrients","nutrition.properties","nutrition.flavonoids","nutrition.ingredients"),names_repair="unique")
     #Unnest the data-frame and create new columns for each nutrient
-    recipes <- unnest_wider(recipes,)
 
     return(recipes)
   } else {
