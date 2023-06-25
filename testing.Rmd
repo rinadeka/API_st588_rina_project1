@@ -6,3 +6,21 @@ output: html_notebook
 Testing connection to github
 
 Want to see if this works!
+
+```{r}
+library(httr)
+library(jsonlite)
+library(tidyverse)
+```
+
+
+
+```{r}
+complex<-GET("https://api.spoonacular.com/recipes/complexSearch&apiKey=d3ac9a84da954e469bb394dc8b157681")
+complex
+```
+
+```{r}
+str(complex)
+```
+
