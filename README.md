@@ -1,6 +1,6 @@
 Interacting with APIs: Example with Spoontacular Food and Recipe API
 ================
-Rina Deka
+Rina Deka<br/>
 6/25/2023
 
 -   [Requirements](#requirements)
