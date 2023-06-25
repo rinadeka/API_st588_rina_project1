@@ -6,6 +6,8 @@ Rina Deka
 - <a href="#requirements" id="toc-requirements">Requirements</a>
 - <a href="#api-interaction-functions"
   id="toc-api-interaction-functions">API Interaction Functions</a>
+  - <a href="#getrecipesbydiet"
+    id="toc-getrecipesbydiet">‘getRecipesByDiet’</a>
 - <a href="#exploratory-data-analysis"
   id="toc-exploratory-data-analysis">Exploratory Data Analysis</a>
 - <a href="#conclusion" id="toc-conclusion">Conclusion</a>
@@ -34,14 +36,28 @@ Please note that the API key I used was
 
 # API Interaction Functions
 
+This is where I created functions for interacting with [spoonacular’s
+complex search
+AP](https://spoonacular.com/food-api/docs#Search-Recipes-Complex), which
+is itself a combination of searching by query, ingredients, and by
+nutrients into a single endpoint. I also created functions for
+interacting with [spoonacular’s Grocery Products
+search](https://spoonacular.com/food-api/docs#Search-Grocery-Products).
+This way, you can parse through recipe data based on certain conditions
+(such as a dietary restriction), look at the nutritional information,
+and then also try to find grocery products that might suit your recipe.
+
+## ‘getRecipesByDiet’
+
 Suppose that I would like to create a function that will return
 well-parsed data so that one can look at ingredient and nutrition
-information for a reciple given some sort of dietary restriction.
+information for a recipe given some sort of dietary restriction. The
+function below allows the user to get pertinent information about
+recipes with the dietary restriction in question.
 
 ``` r
-getRecipesByDiet <- function(diet,number=10) {
-  apiKey <- "d3ac9a84da954e469bb394dc8b157681"  # Replace with your actual API key
-  
+getRecipesByDiet <- function(diet,number=10,apiKey="d3ac9a84da954e469bb394dc8b157681") {
+  #note: this function defaults to my API key, but you should use your own in the function argument
   endpoint <- "/recipes/complexSearch"
   
   # Set the parameters for the API request
@@ -67,10 +83,6 @@ getRecipesByDiet <- function(diet,number=10) {
     # Extract relevant information from the response
     recipes <- content$results
     recipes <- recipes %>% select(-c("gaps","sourceUrl","imageType","image","analyzedInstructions","license","spoonacularSourceUrl","creditsText","author"))
-   # recipes <- unnest(recipes,cols=c("nutrition.ingredients"),names_repair = "unique")
-    #recipes <- unnest(recipes,cols=c("nutrition.nutrients"),names_repair = "unique")
-    #reciples<- recipes %>% unnest(cols=c("nutrition.nutrients","nutrition.properties","nutrition.flavonoids","nutrition.ingredients"),names_repair="unique")
-    #Unnest the data-frame and create new columns for each nutrient
 
     return(recipes)
   } else {
@@ -84,7 +96,7 @@ getRecipesByDiet <- function(diet,number=10) {
 ``` r
 diet <- "vegan"  # Replace with the desired dietary restriction
 
-recipes <- getRecipesByDiet(diet,number=100)
+recipes <- getRecipesByDiet(diet,number=100,apiKey="d3ac9a84da954e469bb394dc8b157681")
 
 recipes
 ```
