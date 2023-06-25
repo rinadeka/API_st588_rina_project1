@@ -12,7 +12,8 @@ rmarkdown::render(
   knit_meta = NULL,
   envir = parent.frame(),
   run_pandoc = TRUE,
-  quiet = FALSE,
+  quiet = TRUE,
   encoding = "UTF-8"
 )
+
 

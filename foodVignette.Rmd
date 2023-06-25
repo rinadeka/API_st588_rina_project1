@@ -28,6 +28,8 @@ Please note that the API key I used was "d3ac9a84da954e469bb394dc8b157681", but 
 
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
+library(knitr)
+library(rmarkdown)
 library(httr)
 library(jsonlite)
 library(tidyverse)
