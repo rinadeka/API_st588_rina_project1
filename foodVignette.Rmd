@@ -107,6 +107,9 @@ recipes$nutrition.nutrients
 recipes$nutrition.ingredients
 ```
 
+```{r}
+recipes$nutrition.caloricBreakdown.percentCarbs
+```
 
 
 # Conclusion 
