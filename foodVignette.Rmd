@@ -72,7 +72,7 @@ getRecipesByDiet <- function(diet,number=10,apiKey="d3ac9a84da954e469bb394dc8b15
     
     # Extract relevant information from the response
     recipes <- content$results
-    recipes <- recipes %>% select(-c("gaps","sourceUrl","imageType","image","analyzedInstructions","license","spoonacularSourceUrl","creditsText","author"))
+    recipes <- recipes %>% select(-c("gaps","sourceUrl","imageType","image","analyzedInstructions","license","spoonacularSourceUrl","creditsText","author","sourceName"))
 
     return(recipes)
   } else {
