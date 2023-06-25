@@ -1,0 +1,24 @@
+---
+title: "Interacting with APIs: Example with Spoontacular Food and Recipe API"
+author: "Rina Deka"
+date: "06/25/2023"
+output: 
+  github_document:
+    toc: true
+    html_preview: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+This document is a vignette to demonstrate how one may retrieve data from an [API](https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces). In this tutorial, I will be interacting with Spoontacular's [food API](https://spoonacular.com/food-api/docs). I have created a few functions to interact with a few endpoints for user ease, and I'll use these to explore some of the data that was retrieved. 
+
+
+```{r,echo=FALSE,eval=FALSE}
+library(httr)
+library(jsonlite)
+library(tidyverse)
+```
+
