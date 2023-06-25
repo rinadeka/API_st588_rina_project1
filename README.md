@@ -4,6 +4,8 @@ Rina Deka
 06/25/2023
 
 - <a href="#requirements" id="toc-requirements">Requirements</a>
+- <a href="#api-interaction-functions"
+  id="toc-api-interaction-functions">API Interaction Functions</a>
 - <a href="#exploratory-data-analysis"
   id="toc-exploratory-data-analysis">Exploratory Data Analysis</a>
 - <a href="#conclusion" id="toc-conclusion">Conclusion</a>
@@ -30,7 +32,7 @@ following packages:
 Please note that the API key I used was
 “d3ac9a84da954e469bb394dc8b157681”, but yours will be different.
 
-j \# API Interaction Functions
+# API Interaction Functions
 
 Suppose that I would like to create a function that will return
 well-parsed data so that one can look at ingredient and nutrition

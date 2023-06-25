@@ -35,7 +35,7 @@ library(jsonlite)
 library(tidyverse)
 ```
 
-j
+
 # API Interaction Functions
 
 Suppose that I would like to create a function that will return well-parsed data so that one can look at ingredient and nutrition information for a reciple given some sort of dietary restriction. 
