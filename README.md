@@ -6,6 +6,8 @@ Rina Deka
 - <a href="#requirements" id="toc-requirements">Requirements</a>
 - <a href="#api-interaction-functions"
   id="toc-api-interaction-functions">API Interaction Functions</a>
+  - <a href="#getrecipesbydiet"
+    id="toc-getrecipesbydiet"><code>getRecipesByDiet</code></a>
   - <a href="#getingredientsbyquery"
     id="toc-getingredientsbyquery"><code>getIngredientsByQuery</code></a>
 - <a href="#exploratory-data-analysis"
@@ -55,12 +57,13 @@ This way, you can parse through recipe data based on certain conditions
 (such as a dietary restriction), look at the nutritional information,
 and then also try to find grocery products that might suit your recipe.
 
-\##`getRecipesByDiet` Suppose that I would like to create a function
-that will return well-parsed data so that one can look at the
-corresponding ingredient and nutrition information for a recipe given
-some sort of dietary restriction. The function below allows the user to
-get pertinent information about recipes with the dietary restriction in
-question.
+## `getRecipesByDiet`
+
+Suppose that I would like to create a function that will return
+well-parsed data so that one can look at the corresponding ingredient
+and nutrition information for a recipe given some sort of dietary
+restriction. The function below allows the user to get pertinent
+information about recipes with the dietary restriction in question.
 
 A full list of supported diets is available
 [here](https://spoonacular.com/food-api/docs#Diets).
@@ -294,21 +297,21 @@ head(vegan_df)
 ```
 
     ## # A tibble: 6 × 38
-    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular
-    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>      
-    ## 1 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 2 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 3 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 4 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 5 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 6 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## # ℹ 31 more variables: sustainable <lgl>, lowFodmap <lgl>,
-    ## #   weightWatcherSmartPoints <int>, preparationMinutes <int>,
-    ## #   cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
-    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>,
-    ## #   servings <int>, cuisines <chr>, dishTypes <chr>, diets <chr>,
-    ## #   occasions <chr>, author <chr>, nutrition_info <list<chr>>,
-    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, …
+    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular sustainable lowFodmap weightWatcherSmartPoints
+    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>       <lgl>       <lgl>                        <int>
+    ## 1 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 2 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 3 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 4 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 5 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 6 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## # ℹ 28 more variables: preparationMinutes <int>, cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
+    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>, servings <int>, cuisines <chr>,
+    ## #   dishTypes <chr>, diets <chr>, occasions <chr>, author <chr>, nutrition_info <list<chr>>,
+    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, percentOfDailyNeeds <list<dbl>>,
+    ## #   ingredient_id <list<int>>, ingredient_name <list<chr>>, ingredient_amount <list<dbl>>,
+    ## #   ingredient_unit <list<chr>>, ingredient_nutrient <list<list>>, nutrition.caloricBreakdown.percentProtein <dbl>,
+    ## #   nutrition.caloricBreakdown.percentFat <dbl>, nutrition.caloricBreakdown.percentCarbs <dbl>, …
 
 Similarly, for 100 recipes, let’s look at the data for someone who is on
 a keto diet.
@@ -322,21 +325,21 @@ head(keto_df)
 ```
 
     ## # A tibble: 6 × 38
-    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular
-    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>      
-    ## 1 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE       
-    ## 2 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE       
-    ## 3 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE       
-    ## 4 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE       
-    ## 5 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE       
-    ## 6 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE       
-    ## # ℹ 31 more variables: sustainable <lgl>, lowFodmap <lgl>,
-    ## #   weightWatcherSmartPoints <int>, preparationMinutes <int>,
-    ## #   cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
-    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>,
-    ## #   servings <int>, cuisines <chr>, dishTypes <chr>, diets <chr>,
-    ## #   occasions <chr>, author <chr>, nutrition_info <list<chr>>,
-    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, …
+    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular sustainable lowFodmap weightWatcherSmartPoints
+    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>       <lgl>       <lgl>                        <int>
+    ## 1 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE        FALSE       FALSE                           19
+    ## 2 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE        FALSE       FALSE                           19
+    ## 3 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE        FALSE       FALSE                           19
+    ## 4 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE        FALSE       FALSE                           19
+    ## 5 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE        FALSE       FALSE                           19
+    ## 6 TRUE       FALSE TRUE       FALSE     FALSE       FALSE TRUE        FALSE       FALSE                           19
+    ## # ℹ 28 more variables: preparationMinutes <int>, cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
+    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>, servings <int>, cuisines <chr>,
+    ## #   dishTypes <chr>, diets <chr>, occasions <chr>, author <chr>, nutrition_info <list<chr>>,
+    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, percentOfDailyNeeds <list<dbl>>,
+    ## #   ingredient_id <list<int>>, ingredient_name <list<chr>>, ingredient_amount <list<dbl>>,
+    ## #   ingredient_unit <list<chr>>, ingredient_nutrient <list<list>>, nutrition.caloricBreakdown.percentProtein <dbl>,
+    ## #   nutrition.caloricBreakdown.percentFat <dbl>, nutrition.caloricBreakdown.percentCarbs <dbl>, …
 
 For later use, I’ll also create a combined dataframe with an indicator
 function variable to indicate whether or not a diet came from the keto
@@ -353,21 +356,21 @@ head(combined_df)
 ```
 
     ## # A tibble: 6 × 39
-    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular
-    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>      
-    ## 1 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 2 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 3 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 4 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 5 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 6 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## # ℹ 32 more variables: sustainable <lgl>, lowFodmap <lgl>,
-    ## #   weightWatcherSmartPoints <int>, preparationMinutes <int>,
-    ## #   cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
-    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>,
-    ## #   servings <int>, cuisines <chr>, dishTypes <chr>, diets <chr>,
-    ## #   occasions <chr>, author <chr>, nutrition_info <list<chr>>,
-    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, …
+    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular sustainable lowFodmap weightWatcherSmartPoints
+    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>       <lgl>       <lgl>                        <int>
+    ## 1 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 2 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 3 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 4 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 5 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 6 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## # ℹ 29 more variables: preparationMinutes <int>, cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
+    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>, servings <int>, cuisines <chr>,
+    ## #   dishTypes <chr>, diets <chr>, occasions <chr>, author <chr>, nutrition_info <list<chr>>,
+    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, percentOfDailyNeeds <list<dbl>>,
+    ## #   ingredient_id <list<int>>, ingredient_name <list<chr>>, ingredient_amount <list<dbl>>,
+    ## #   ingredient_unit <list<chr>>, ingredient_nutrient <list<list>>, nutrition.caloricBreakdown.percentProtein <dbl>,
+    ## #   nutrition.caloricBreakdown.percentFat <dbl>, nutrition.caloricBreakdown.percentCarbs <dbl>, …
 
 Suppose that we wanted to compare the protein percentage in the vegan
 recipes as compared to the keto recipes. Let’s take a look at the
@@ -379,7 +382,7 @@ h1 <- hist(vegan_df$nutrition.caloricBreakdown.percentProtein,
      xlab = "Percent Protein Vegan")
 ```
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-9-1.png)<!-- -->
+![](./images/unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 h2<-hist(keto_df$nutrition.caloricBreakdown.percentProtein,
@@ -387,7 +390,7 @@ h2<-hist(keto_df$nutrition.caloricBreakdown.percentProtein,
      xlab = "Percent Protein Keto")
 ```
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-9-2.png)<!-- -->
+![](./images/unnamed-chunk-9-2.png)<!-- -->
 
 ``` r
 plot( h1, col=rgb(0,0,1,1/4), xlim=c(0,50),main="",xlab="",ylab="")  # first histogram
@@ -396,7 +399,7 @@ title(main = "Vegan vs. Keto Protein Distribution Comparison",
       xlab = "Diet Percent Protein: Vegan (Purple) and Keto (Pink)", ylab ="Frequency")
 ```
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-10-1.png)<!-- -->
+![](./images/unnamed-chunk-10-1.png)<!-- -->
 
 It’s fairly clear from this histograms (and especially that overlayed
 histogram), that it’s easier to get a higher percentage of your daily
@@ -411,9 +414,9 @@ title(main = "Vegan vs. Keto Carb Distribution Comparison",
       xlab = "Diet", ylab ="Percentage Carbs")
 ```
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-11-1.png)<!-- -->
-Unsurprisingly, it seems that keto diets has less percentage of carbs as
-compared to vegan recipes.
+![](./images/unnamed-chunk-11-1.png)<!-- --> Unsurprisingly, it seems
+that keto diets has less percentage of carbs as compared to vegan
+recipes.
 
 ``` r
 boxplot(vegan_df$nutrition.caloricBreakdown.percentFat,keto_df$nutrition.caloricBreakdown.percentFat,names=c("Vegan","Keto"),col=c("darkgreen","cornsilk"))
@@ -421,7 +424,7 @@ title(main = "Vegan vs. Keto Fat Distribution Comparison",
       xlab = "Diet", ylab ="Percentage Fats")
 ```
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-12-1.png)<!-- -->
+![](./images/unnamed-chunk-12-1.png)<!-- -->
 
 No surprises here! A ketogenic diet is intended to be high in fats, so
 the average percentage fats in a keto recipe is way higher than that of
@@ -439,7 +442,7 @@ title(main = "Aggregate Like for Vegan vs. Keto Recipes",
       xlab = "Diet", ylab ="Aggregate Likes (Log Scale)")
 ```
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-13-1.png)<!-- -->
+![](./images/unnamed-chunk-13-1.png)<!-- -->
 
 It seems that people like vegan recipes more than keto recipes! I wonder
 if it is because of anything in particular (does keto not gain a lot of
@@ -459,21 +462,21 @@ head(combined_df_carbs)
 ```
 
     ## # A tibble: 6 × 40
-    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular
-    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>      
-    ## 1 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 2 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 3 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 4 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 5 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 6 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## # ℹ 33 more variables: sustainable <lgl>, lowFodmap <lgl>,
-    ## #   weightWatcherSmartPoints <int>, preparationMinutes <int>,
-    ## #   cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
-    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>,
-    ## #   servings <int>, cuisines <chr>, dishTypes <chr>, diets <chr>,
-    ## #   occasions <chr>, author <chr>, nutrition_info <list<chr>>,
-    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, …
+    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular sustainable lowFodmap weightWatcherSmartPoints
+    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>       <lgl>       <lgl>                        <int>
+    ## 1 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 2 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 3 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 4 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 5 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 6 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## # ℹ 30 more variables: preparationMinutes <int>, cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
+    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>, servings <int>, cuisines <chr>,
+    ## #   dishTypes <chr>, diets <chr>, occasions <chr>, author <chr>, nutrition_info <list<chr>>,
+    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, percentOfDailyNeeds <list<dbl>>,
+    ## #   ingredient_id <list<int>>, ingredient_name <list<chr>>, ingredient_amount <list<dbl>>,
+    ## #   ingredient_unit <list<chr>>, ingredient_nutrient <list<list>>, nutrition.caloricBreakdown.percentProtein <dbl>,
+    ## #   nutrition.caloricBreakdown.percentFat <dbl>, nutrition.caloricBreakdown.percentCarbs <dbl>, …
 
 Make sure to group the carb content variable we just created.
 
@@ -484,21 +487,21 @@ head(carb_df)
 
     ## # A tibble: 6 × 40
     ## # Groups:   carb_content [1]
-    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular
-    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>      
-    ## 1 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 2 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 3 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 4 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 5 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## 6 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE      
-    ## # ℹ 33 more variables: sustainable <lgl>, lowFodmap <lgl>,
-    ## #   weightWatcherSmartPoints <int>, preparationMinutes <int>,
-    ## #   cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
-    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>,
-    ## #   servings <int>, cuisines <chr>, dishTypes <chr>, diets <chr>,
-    ## #   occasions <chr>, author <chr>, nutrition_info <list<chr>>,
-    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, …
+    ##   vegetarian vegan glutenFree dairyFree veryHealthy cheap veryPopular sustainable lowFodmap weightWatcherSmartPoints
+    ##   <lgl>      <lgl> <lgl>      <lgl>     <lgl>       <lgl> <lgl>       <lgl>       <lgl>                        <int>
+    ## 1 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 2 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 3 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 4 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 5 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## 6 TRUE       TRUE  TRUE       TRUE      TRUE        FALSE FALSE       FALSE       FALSE                           12
+    ## # ℹ 30 more variables: preparationMinutes <int>, cookingMinutes <int>, aggregateLikes <int>, healthScore <int>,
+    ## #   pricePerServing <dbl>, id <int>, title <chr>, readyInMinutes <int>, servings <int>, cuisines <chr>,
+    ## #   dishTypes <chr>, diets <chr>, occasions <chr>, author <chr>, nutrition_info <list<chr>>,
+    ## #   nutrient_amount <list<dbl>>, nutrient_unit <list<chr>>, percentOfDailyNeeds <list<dbl>>,
+    ## #   ingredient_id <list<int>>, ingredient_name <list<chr>>, ingredient_amount <list<dbl>>,
+    ## #   ingredient_unit <list<chr>>, ingredient_nutrient <list<list>>, nutrition.caloricBreakdown.percentProtein <dbl>,
+    ## #   nutrition.caloricBreakdown.percentFat <dbl>, nutrition.caloricBreakdown.percentCarbs <dbl>, …
 
 ``` r
 likes_sum <- combined_df_carbs %>%
@@ -513,7 +516,7 @@ ggplot(likes_sum, aes(carb_content, total_likes,fill=carb_content)) +
   ggtitle("Total Likes by Carb Content")
 ```
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-16-1.png)<!-- -->
+![](./images/unnamed-chunk-16-1.png)<!-- -->
 
 It seems that both high and very low carb recipes are not that
 well-liked! Furthermore, it seems that low carb recipes are the best
@@ -570,7 +573,7 @@ ggplot(combined_df, aes(x=nutrition.caloricBreakdown.percentCarbs, y=nutrition.c
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-18-1.png)<!-- -->
+![](./images/unnamed-chunk-18-1.png)<!-- -->
 
 ``` r
 #Carbs vs Protein, all
@@ -584,7 +587,7 @@ ggplot(combined_df, aes(x=nutrition.caloricBreakdown.percentCarbs, y=nutrition.c
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-19-1.png)<!-- -->
+![](./images/unnamed-chunk-19-1.png)<!-- -->
 
 ``` r
 ggplot(combined_df, aes(x=nutrition.caloricBreakdown.percentProtein, y=nutrition.caloricBreakdown.percentFat)) + 
@@ -597,7 +600,7 @@ ggplot(combined_df, aes(x=nutrition.caloricBreakdown.percentProtein, y=nutrition
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-20-1.png)<!-- -->
+![](./images/unnamed-chunk-20-1.png)<!-- -->
 
 There seems to be a positive linear relationship between percent protein
 and percent fat, but curiously there looks like there is a strongly
@@ -617,7 +620,7 @@ ggplot(vegan_df, aes(x=nutrition.caloricBreakdown.percentCarbs, y=nutrition.calo
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-21-1.png)<!-- -->
+![](./images/unnamed-chunk-21-1.png)<!-- -->
 
 ``` r
 #vegan, carbs vs. protein
@@ -631,7 +634,7 @@ ggplot(vegan_df, aes(x=nutrition.caloricBreakdown.percentCarbs, y=nutrition.calo
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-21-2.png)<!-- -->
+![](./images/unnamed-chunk-21-2.png)<!-- -->
 
 ``` r
 #vegan, protein vs. fat
@@ -645,7 +648,7 @@ ggplot(vegan_df, aes(x=nutrition.caloricBreakdown.percentProtein, y=nutrition.ca
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-21-3.png)<!-- -->
+![](./images/unnamed-chunk-21-3.png)<!-- -->
 
 ``` r
 #keto, carbs vs. fat
@@ -659,7 +662,7 @@ ggplot(keto_df, aes(x=nutrition.caloricBreakdown.percentCarbs, y=nutrition.calor
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-22-1.png)<!-- -->
+![](./images/unnamed-chunk-22-1.png)<!-- -->
 
 ``` r
 #keto, carbs vs. protein
@@ -673,7 +676,7 @@ ggplot(keto_df, aes(x=nutrition.caloricBreakdown.percentCarbs, y=nutrition.calor
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-22-2.png)<!-- -->
+![](./images/unnamed-chunk-22-2.png)<!-- -->
 
 ``` r
 #keto, protein vs. fat
@@ -687,15 +690,15 @@ ggplot(keto_df, aes(x=nutrition.caloricBreakdown.percentProtein, y=nutrition.cal
 
     ## `geom_smooth()` using formula = 'y ~ x'
 
-![](C:/Users/rsdek/Documents/repos/food-api-vignette/images/unnamed-chunk-22-3.png)<!-- -->
-Curiously, it seems that there is a strongly negative relationship
-between fat and protein for both keto and vegan diets (as you gain more
-protein, you get less fat). This isn’t the case for the combination of
-all the diets! I was especially surprised for keto, as you would think
-that your protein percentage and fat percentage would both be relatively
-high if you’re keeping starches (carbs) low. I also can’t really explain
-why the relationship between protein and fat would be negative for the
-vegan or keto diets, but combined the relationship is semi-positive.
+![](./images/unnamed-chunk-22-3.png)<!-- --> Curiously, it seems that
+there is a strongly negative relationship between fat and protein for
+both keto and vegan diets (as you gain more protein, you get less fat).
+This isn’t the case for the combination of all the diets! I was
+especially surprised for keto, as you would think that your protein
+percentage and fat percentage would both be relatively high if you’re
+keeping starches (carbs) low. I also can’t really explain why the
+relationship between protein and fat would be negative for the vegan or
+keto diets, but combined the relationship is semi-positive.
 
 We also have a lot of interesting categorical variables (especially
 logicals) that we could look at. Let’s look at some contingency tables

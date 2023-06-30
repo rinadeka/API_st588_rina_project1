@@ -9,8 +9,9 @@ output:
 ---
 
 
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.path="C:/Users/rsdek/Documents/repos/food-api-vignette/images/")
+knitr::opts_chunk$set(fig.path="./images/")
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -47,7 +48,7 @@ library(tidyverse)
 This is where I created functions for interacting with [spoonacular's complex search AP](https://spoonacular.com/food-api/docs#Search-Recipes-Complex), which is itself a combination of searching by query, ingredients, and by nutrients into a single endpoint. I also created functions for interacting with [spoonacular's Glycemic Load calculator for ingredients](https://spoonacular.com/food-api/docs#Compute-Glycemic-Load). This way, you can parse through recipe data based on certain conditions (such as a dietary restriction), look at the nutritional information, and then also try to find grocery products that might suit your recipe.
 
 
-##`getRecipesByDiet`
+## `getRecipesByDiet`
 Suppose that I would like to create a function that will return well-parsed data so that one can look at the corresponding ingredient and nutrition information for a recipe given some sort of dietary restriction. The function below allows the user to get pertinent information about recipes with the dietary restriction in question.
 
 A full list of supported diets is available [here](https://spoonacular.com/food-api/docs#Diets).
